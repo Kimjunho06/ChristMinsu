@@ -46,7 +46,7 @@ public class NetworkManager : MonoBehaviour
     public void SendName(string value)
     {
         Name name = new Name();
-        name.Value = "ㅅㅂ";
+        name.Value = value;
         ushort len = (ushort)(name.CalculateSize() + 4);
 
         ArraySegment<byte> segment = new ArraySegment<byte>(new byte[len]);

@@ -28,11 +28,11 @@ wss.on("connection", (soc) => {
         let payload: Buffer = rawData.slice(4) as Buffer;
         console.log(`Get Packet. length: ${length}, code: ${code}`);
 
-        if(code == 0)
+        if(code == christMinsu.MSGID.NAME)
         {
             let name: christMinsu.Name = christMinsu.Name.deserialize(payload);
-            console.log(`Session Name: ${name.value}, id: ${session.id}`);
-            session.name = name.value;
+            session.login(name.value);
+            console.log(`Session Name: ${session.name}, id: ${session.id}`);
         }
     });
 
