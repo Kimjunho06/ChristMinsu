@@ -1,0 +1,14 @@
+syntax = "proto3";
+package christMinsu;
+
+option csharp_namespace = "ChristMinsu.Packet";
+
+enum MSGID
+{
+    NAME = 0;
+}
+
+message Name 
+{
+    string value = 1;
+}
