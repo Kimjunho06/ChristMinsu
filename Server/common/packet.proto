@@ -6,9 +6,16 @@ option csharp_namespace = "ChristMinsu.Packet";
 enum MSGID
 {
     NAME = 0;
+    SessionINFO = 1;
 }
 
 message Name 
 {
     string value = 1;
+}
+
+message SessionInfo
+{
+    string uuid = 1;
+    string name = 2;
 }

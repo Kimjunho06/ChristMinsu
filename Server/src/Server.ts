@@ -3,6 +3,7 @@ import Express, { Application } from "express";
 import WebSocket, { RawData, Server } from "ws";
 import Session from "./Session";
 import { christMinsu } from "./packet/packet";
+import { SessionState } from "./SessionState";
 
 const App: Application = Express();
 
@@ -21,6 +22,7 @@ wss.on("listening", (soc: WebSocket) => {
 wss.on("connection", (soc) => {
     let session = new Session(soc);
     console.log(`New Session Login. ${session.id}`);
+    soc.send(new christMinsu.SessionInfo({uuid: session.id, name: "NONE"}).serialize(), {binary: true});
 
     soc.on("message", (rawData: RawData, isBinary: boolean) => {
         let length: number = (rawData.slice(0, 2) as Buffer).readInt16LE();
@@ -30,13 +32,16 @@ wss.on("connection", (soc) => {
 
         if(code == christMinsu.MSGID.NAME)
         {
-            let name: christMinsu.Name = christMinsu.Name.deserialize(payload);
-            session.login(name.value);
-            console.log(`Session Name: ${session.name}, id: ${session.id}`);
+            if(session.state == SessionState.LOGOUT)
+            {
+                let name: christMinsu.Name = christMinsu.Name.deserialize(payload);
+                session.login(name.value);
+                console.log(`Session Name: ${session.name}, id: ${session.id}`);
+            }
         }
     });
 
     soc.on("close", (code: number, reason: Buffer) => {
         console.log(`Session Disconnected. ${session.id}`);
-    })
+    });
 });

@@ -6,7 +6,8 @@
 import * as pb_1 from "google-protobuf";
 export namespace christMinsu {
     export enum MSGID {
-        NAME = 0
+        NAME = 0,
+        SessionINFO = 1
     }
     export class Name extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -73,6 +74,96 @@ export namespace christMinsu {
         }
         static deserializeBinary(bytes: Uint8Array): Name {
             return Name.deserialize(bytes);
+        }
+    }
+    export class SessionInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            uuid?: string;
+            name?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("uuid" in data && data.uuid != undefined) {
+                    this.uuid = data.uuid;
+                }
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+            }
+        }
+        get uuid() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set uuid(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            uuid?: string;
+            name?: string;
+        }): SessionInfo {
+            const message = new SessionInfo({});
+            if (data.uuid != null) {
+                message.uuid = data.uuid;
+            }
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                uuid?: string;
+                name?: string;
+            } = {};
+            if (this.uuid != null) {
+                data.uuid = this.uuid;
+            }
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.uuid.length)
+                writer.writeString(1, this.uuid);
+            if (this.name.length)
+                writer.writeString(2, this.name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SessionInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SessionInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.uuid = reader.readString();
+                        break;
+                    case 2:
+                        message.name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SessionInfo {
+            return SessionInfo.deserialize(bytes);
         }
     }
 }

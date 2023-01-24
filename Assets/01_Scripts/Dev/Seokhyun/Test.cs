@@ -11,7 +11,11 @@ namespace Seokhyun
 
         public void SendName()
         {
-            if(field.text == null || field.text == "") return;
+            if(field.text == null || field.text == "")
+            {
+                Debug.LogWarning("필드에 값을 입력해 주세요");
+                return;
+            }
             NetworkManager.Instance.SendName(field.text);
         }
     }

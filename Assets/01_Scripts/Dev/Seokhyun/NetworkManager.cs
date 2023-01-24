@@ -4,8 +4,11 @@ using UnityEngine;
 using System.Net.WebSockets;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using ChristMinsu.Packet;
 using Google.Protobuf;
+using TMPro;
+using Unity.VisualScripting;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -16,11 +19,13 @@ public class NetworkManager : MonoBehaviour
             if(_instance == null)
                 _instance = FindObjectOfType<NetworkManager>();
             return _instance;
-        } 
+        }
     }
     
     private ClientWebSocket _socket = null;
 
+    private TextMeshProUGUI _socketState = null;
+    private TextMeshProUGUI _socketUUID = null;
 
     private void Awake()
     {
@@ -31,11 +36,18 @@ public class NetworkManager : MonoBehaviour
             return;
         }
         _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        Transform canvas = GameObject.Find("Canvas").transform;
+        _socketState = canvas.Find("SocketState").GetComponent<TextMeshProUGUI>();
+        _socketUUID = canvas.Find("UUID").GetComponent<TextMeshProUGUI>();
+
+        UpdateSocketState();
     }
 
     private void Start()
     {
-        Connection();
+        // Connection();
     }
 
     private void OnDestroy()
@@ -63,18 +75,37 @@ public class NetworkManager : MonoBehaviour
         if(_socket != null && _socket.State == WebSocketState.Open)
         {
             Debug.Log("Socket is already Open!");
+            UpdateSocketState();
             return;
         }
 
         _socket = new ClientWebSocket();
         Uri uri = new Uri("ws://localhost:50000");
 
-        await _socket.ConnectAsync(uri, CancellationToken.None);
+        try
+        {
+            await _socket.ConnectAsync(uri, CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            _socket = null;
+            Debug.LogError("Failed to connect");
+            Debug.LogException(ex);
+            UpdateSocketState();
+            return;
+        }
         Debug.Log("Socket is now Open!");
+        
+        UpdateSocketState();
     }
 
     public async void SendData(ArraySegment<byte> segment)
     {
+        if(_socket == null || _socket.State != WebSocketState.Open)
+        {
+            Debug.LogError("Socket is not connected. Can't send Data");
+            return;
+        }
         await _socket.SendAsync(segment, WebSocketMessageType.Binary, true, CancellationToken.None);
     }
 
@@ -84,6 +115,21 @@ public class NetworkManager : MonoBehaviour
         {
             _socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Quit", CancellationToken.None);
             Debug.Log("Socket is Disconnected!");
+            UpdateSocketState();
+        }
+    }
+
+    private void UpdateSocketState()
+    {
+        if(_socket != null && _socket.State == WebSocketState.Open)
+        {
+            _socketState.text = "접속 상태 - 접속됨";
+            _socketUUID.text = "UUID : {_socket.GetUUID()}";
+        }
+        else
+        {
+            _socketState.text = "접속 상태 - 접속되지 않음";
+            _socketUUID.text = string.Empty;
         }
     }
 }
