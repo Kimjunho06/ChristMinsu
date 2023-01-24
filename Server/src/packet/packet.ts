@@ -7,7 +7,9 @@ import * as pb_1 from "google-protobuf";
 export namespace christMinsu {
     export enum MSGID {
         NAME = 0,
-        SessionINFO = 1
+        SessionINFO = 1,
+        ChangeSCENE = 2,
+        CHAT = 4
     }
     export class Name extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -164,6 +166,163 @@ export namespace christMinsu {
         }
         static deserializeBinary(bytes: Uint8Array): SessionInfo {
             return SessionInfo.deserialize(bytes);
+        }
+    }
+    export class ChangeScene extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            name?: string;
+        }): ChangeScene {
+            const message = new ChangeScene({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ChangeScene {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ChangeScene();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): ChangeScene {
+            return ChangeScene.deserialize(bytes);
+        }
+    }
+    export class Chat extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+            value?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("value" in data && data.value != undefined) {
+                    this.value = data.value;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get value() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set value(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            name?: string;
+            value?: string;
+        }): Chat {
+            const message = new Chat({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.value != null) {
+                message.value = data.value;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+                value?: string;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.value != null) {
+                data.value = this.value;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.value.length)
+                writer.writeString(2, this.value);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Chat {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Chat();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    case 2:
+                        message.value = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Chat {
+            return Chat.deserialize(bytes);
         }
     }
 }

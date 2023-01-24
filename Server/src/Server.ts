@@ -1,11 +1,17 @@
 import http, { createServer } from "http";
 import Express, { Application } from "express";
-import WebSocket, { RawData, Server } from "ws";
-import Session from "./Session";
+import WebSocket, { AddressInfo, RawData, Server } from "ws";
 import { christMinsu } from "./packet/packet";
-import { SessionState } from "./SessionState";
+import crypto from "crypto";
+import Session from "./Session";
+import SessionManager from "./SessionManager";
+import PacketManager from "./PacketManager";
 
 const App: Application = Express();
+
+App.get("/", (req, res) => {
+    res.json(SessionManager.Instance.sessionMap);
+})
 
 const httpServer = App.listen(50000, () => {
     console.log("Http Server is running on port 50000");
@@ -15,33 +21,28 @@ const wss: Server = new Server({
     server: httpServer
 });
 
-wss.on("listening", (soc: WebSocket) => {
+PacketManager.Instance = new PacketManager();
+SessionManager.Instance = new SessionManager();
+
+wss.on("listening", () => {
     console.log("WS Server is running on port 50000");
 });
 
-wss.on("connection", (soc) => {
-    let session = new Session(soc);
-    console.log(`New Session Login. ${session.id}`);
-    soc.send(new christMinsu.SessionInfo({uuid: session.id, name: "NONE"}).serialize(), {binary: true});
+wss.on("connection", (soc: WebSocket, req: http.IncomingMessage) => {
+    const uuid = crypto.randomUUID();
+    let session = new Session(soc, uuid, () => {
+        SessionManager.Instance.removeSession(uuid);
+    });
+    SessionManager.Instance.addSession(session, uuid);
+    console.log(
+        `New Session login. id: ${uuid}, ip: ${req.connection.remoteAddress}`
+    );
+
+    let info = new christMinsu.SessionInfo({name: "", uuid:uuid});
+    session.sendData(info.serialize(), christMinsu.MSGID.SessionINFO);
 
     soc.on("message", (rawData: RawData, isBinary: boolean) => {
-        let length: number = (rawData.slice(0, 2) as Buffer).readInt16LE();
-        let code: number = (rawData.slice(2, 4) as Buffer).readInt16LE();
-        let payload: Buffer = rawData.slice(4) as Buffer;
-        console.log(`Get Packet. length: ${length}, code: ${code}`);
-
-        if(code == christMinsu.MSGID.NAME)
-        {
-            if(session.state == SessionState.LOGOUT)
-            {
-                let name: christMinsu.Name = christMinsu.Name.deserialize(payload);
-                session.login(name.value);
-                console.log(`Session Name: ${session.name}, id: ${session.id}`);
-            }
-        }
-    });
-
-    soc.on("close", (code: number, reason: Buffer) => {
-        console.log(`Session Disconnected. ${session.id}`);
+        if(isBinary)
+            session.receiveMsg(rawData);
     });
 });
