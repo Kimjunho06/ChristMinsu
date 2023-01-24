@@ -13,9 +13,12 @@ public class Player : MonoBehaviour
 
     private float speed;
 
+    Rigidbody rigid;
+
 
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -44,12 +47,12 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void PlayerMove(KeyCode key, Vector3 dir)
     {
         if (Input.GetKey(key))
         {
-            transform.position += dir.normalized * Time.deltaTime * speed;
+            rigid.velocity = new Vector3(dir.x * speed, rigid.velocity.y, dir.z * speed);
+            //transform.position += dir.normalized * Time.deltaTime * speed;
         }
 
         speed = Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.LeftShift) ? defaultSpeed + dashSpeed : defaultSpeed;
@@ -57,12 +60,14 @@ public class Player : MonoBehaviour
 
     private void PlayerJump(KeyCode key)
     {
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        
         if (Input.GetKeyDown(key))
         {
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jumpCount++;
+        }
+        if (Input.GetKeyUp(key))
+        {
+            rigid.velocity = new Vector3(rigid.velocity.x, rigid.velocity.y / 2, rigid.velocity.z);
         }
     }
 
