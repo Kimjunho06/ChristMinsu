@@ -6,7 +6,7 @@ public class EnterHandler : IPacketHandler
     public void Process(IMessage packet)
     {
         Name name = packet as Name;
-        
-        // 구현해야함
+
+        // ChatManager.Instance.Enter(name);
     }
 }
