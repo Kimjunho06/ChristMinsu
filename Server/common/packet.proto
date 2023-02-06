@@ -8,7 +8,13 @@ enum MSGID
     NAME = 0;
     SessionINFO = 1;
     ChangeSCENE = 2;
-    CHAT = 4;
+    CHAT = 3;
+    MSGBOX = 4;
+}
+
+message MsgBox
+{
+    string msg = 1;
 }
 
 message Name 
@@ -20,15 +26,23 @@ message SessionInfo
 {
     string uuid = 1;
     string name = 2;
+    Position position = 3;
 }
 
 message ChangeScene
 {
-    string name = 1;
+    string sceneName = 1;
+    string sessionName = 2;
 }
 
 message Chat
 {
     string name = 1;
     string value = 2;
+}
+
+message Position
+{
+    float x = 1;
+    float y = 2;
 }

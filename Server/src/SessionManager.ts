@@ -1,4 +1,5 @@
 import Session from "./Session";
+import { SessionState } from "./SessionState";
 import { christMinsu } from "./packet/packet";
 
 export default class SessionManager
@@ -12,6 +13,15 @@ export default class SessionManager
 
     getSession(id: string): Session | undefined {
         return this.sessionMap[id];
+    }
+
+    broadcast(payload: Uint8Array, msgCode: number): void {
+        Object.values(this.sessionMap).forEach(s => {
+            if(s.state == SessionState.LOGIN)
+            {
+                s.sendData(payload, msgCode);
+            }
+        });
     }
 
     addSession(session: Session, id: string): void {

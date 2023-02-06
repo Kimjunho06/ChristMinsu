@@ -24,18 +24,20 @@ namespace ChristMinsu.Packet {
     static PacketReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxwYWNrZXQucHJvdG8SC2NocmlzdE1pbnN1IhUKBE5hbWUSDQoFdmFsdWUY",
-            "ASABKAkiKQoLU2Vzc2lvbkluZm8SDAoEdXVpZBgBIAEoCRIMCgRuYW1lGAIg",
-            "ASgJIhsKC0NoYW5nZVNjZW5lEgwKBG5hbWUYASABKAkiIwoEQ2hhdBIMCgRu",
-            "YW1lGAEgASgJEg0KBXZhbHVlGAIgASgJKj0KBU1TR0lEEggKBE5BTUUQABIP",
-            "CgtTZXNzaW9uSU5GTxABEg8KC0NoYW5nZVNDRU5FEAISCAoEQ0hBVBAEQhWq",
-            "AhJDaHJpc3RNaW5zdS5QYWNrZXRiBnByb3RvMw=="));
+            "CgxwYWNrZXQucHJvdG8SC2NocmlzdE1pbnN1IhUKBk1zZ0JveBILCgNtc2cY",
+            "ASABKAkiFQoETmFtZRINCgV2YWx1ZRgBIAEoCSIpCgtTZXNzaW9uSW5mbxIM",
+            "CgR1dWlkGAEgASgJEgwKBG5hbWUYAiABKAkiNQoLQ2hhbmdlU2NlbmUSEQoJ",
+            "c2NlbmVOYW1lGAEgASgJEhMKC3Nlc3Npb25OYW1lGAIgASgJIiMKBENoYXQS",
+            "DAoEbmFtZRgBIAEoCRINCgV2YWx1ZRgCIAEoCSpJCgVNU0dJRBIICgROQU1F",
+            "EAASDwoLU2Vzc2lvbklORk8QARIPCgtDaGFuZ2VTQ0VORRACEggKBENIQVQQ",
+            "AxIKCgZNU0dCT1gQBEIVqgISQ2hyaXN0TWluc3UuUGFja2V0YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ChristMinsu.Packet.MSGID), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.MsgBox), global::ChristMinsu.Packet.MsgBox.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.Name), global::ChristMinsu.Packet.Name.Parser, new[]{ "Value" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.SessionInfo), global::ChristMinsu.Packet.SessionInfo.Parser, new[]{ "Uuid", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.ChangeScene), global::ChristMinsu.Packet.ChangeScene.Parser, new[]{ "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.ChangeScene), global::ChristMinsu.Packet.ChangeScene.Parser, new[]{ "SceneName", "SessionName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ChristMinsu.Packet.Chat), global::ChristMinsu.Packet.Chat.Parser, new[]{ "Name", "Value" }, null, null, null, null)
           }));
     }
@@ -47,12 +49,202 @@ namespace ChristMinsu.Packet {
     [pbr::OriginalName("NAME")] Name = 0,
     [pbr::OriginalName("SessionINFO")] SessionInfo = 1,
     [pbr::OriginalName("ChangeSCENE")] ChangeScene = 2,
-    [pbr::OriginalName("CHAT")] Chat = 4,
+    [pbr::OriginalName("CHAT")] Chat = 3,
+    [pbr::OriginalName("MSGBOX")] Msgbox = 4,
   }
 
   #endregion
 
   #region Messages
+  public sealed partial class MsgBox : pb::IMessage<MsgBox>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MsgBox> _parser = new pb::MessageParser<MsgBox>(() => new MsgBox());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<MsgBox> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MsgBox() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MsgBox(MsgBox other) : this() {
+      msg_ = other.msg_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public MsgBox Clone() {
+      return new MsgBox(this);
+    }
+
+    /// <summary>Field number for the "msg" field.</summary>
+    public const int MsgFieldNumber = 1;
+    private string msg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Msg {
+      get { return msg_; }
+      set {
+        msg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as MsgBox);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(MsgBox other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Msg != other.Msg) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Msg.Length != 0) hash ^= Msg.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Msg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(MsgBox other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Msg.Length != 0) {
+        Msg = other.Msg;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Msg = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Msg = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class Name : pb::IMessage<Name>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -67,7 +259,7 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[0]; }
+      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -256,7 +448,7 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -482,7 +674,7 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -502,7 +694,8 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ChangeScene(ChangeScene other) : this() {
-      name_ = other.name_;
+      sceneName_ = other.sceneName_;
+      sessionName_ = other.sessionName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -512,15 +705,27 @@ namespace ChristMinsu.Packet {
       return new ChangeScene(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "sceneName" field.</summary>
+    public const int SceneNameFieldNumber = 1;
+    private string sceneName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Name {
-      get { return name_; }
+    public string SceneName {
+      get { return sceneName_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        sceneName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "sessionName" field.</summary>
+    public const int SessionNameFieldNumber = 2;
+    private string sessionName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SessionName {
+      get { return sessionName_; }
+      set {
+        sessionName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -539,7 +744,8 @@ namespace ChristMinsu.Packet {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
+      if (SceneName != other.SceneName) return false;
+      if (SessionName != other.SessionName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -547,7 +753,8 @@ namespace ChristMinsu.Packet {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (SceneName.Length != 0) hash ^= SceneName.GetHashCode();
+      if (SessionName.Length != 0) hash ^= SessionName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -566,9 +773,13 @@ namespace ChristMinsu.Packet {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Name.Length != 0) {
+      if (SceneName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteString(SceneName);
+      }
+      if (SessionName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SessionName);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -580,9 +791,13 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Name.Length != 0) {
+      if (SceneName.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
+        output.WriteString(SceneName);
+      }
+      if (SessionName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SessionName);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -594,8 +809,11 @@ namespace ChristMinsu.Packet {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      if (SceneName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SceneName);
+      }
+      if (SessionName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -609,8 +827,11 @@ namespace ChristMinsu.Packet {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
+      if (other.SceneName.Length != 0) {
+        SceneName = other.SceneName;
+      }
+      if (other.SessionName.Length != 0) {
+        SessionName = other.SessionName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -628,7 +849,11 @@ namespace ChristMinsu.Packet {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Name = input.ReadString();
+            SceneName = input.ReadString();
+            break;
+          }
+          case 18: {
+            SessionName = input.ReadString();
             break;
           }
         }
@@ -647,7 +872,11 @@ namespace ChristMinsu.Packet {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            Name = input.ReadString();
+            SceneName = input.ReadString();
+            break;
+          }
+          case 18: {
+            SessionName = input.ReadString();
             break;
           }
         }
@@ -671,7 +900,7 @@ namespace ChristMinsu.Packet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ChristMinsu.Packet.PacketReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

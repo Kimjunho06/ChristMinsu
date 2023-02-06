@@ -23,7 +23,7 @@ public class NetworkManager : MonoBehaviour
 
     private PacketManager _packetManager;
     private Queue<PacketMessage> _sendQueue = null;
-    private bool _isReadyToSend = true; //다른 걸 보내고 있을 때는 못보냄
+    private bool _isReadyToSend = true; 
 
     // UI
     private TextMeshProUGUI _stateText = null;
@@ -73,20 +73,20 @@ public class NetworkManager : MonoBehaviour
 
         if (_isReadyToSend && _sendQueue.Count > 0)
         {
-            SendMessages(); // 메시지를 보내라
+            SendMessages(); 
         }
     }
 
-    public void RegisterSend(ushort code, IMessage msg)
+    public void RegisterSend(MSGID code, IMessage msg)
     {
-        _sendQueue.Enqueue(new PacketMessage { Id = code, Message = msg });
+        _sendQueue.Enqueue(new PacketMessage { Id = (ushort)code, Message = msg });
     }
 
     private async void SendMessages()
     {
         if (_socket != null && _socket.State == WebSocketState.Open)
         {
-            _isReadyToSend = false; //보내기 시작
+            _isReadyToSend = false; 
 
             List<PacketMessage> sendList = new List<PacketMessage>();
             while (_sendQueue.Count > 0)
@@ -97,7 +97,7 @@ public class NetworkManager : MonoBehaviour
             byte[] sendBuffer = new byte[1024 * 10];
             foreach (PacketMessage pmsg in sendList)
             {
-                int len = pmsg.Message.CalculateSize(); //패킷의 크기
+                int len = pmsg.Message.CalculateSize(); 
 
                 Array.Copy(BitConverter.GetBytes((ushort)(len + 4)), 0, sendBuffer, 0, sizeof(ushort));
                 Array.Copy(BitConverter.GetBytes(pmsg.Id), 0, sendBuffer, 2, sizeof(ushort));
@@ -108,7 +108,7 @@ public class NetworkManager : MonoBehaviour
                 Debug.Log($"패킷 보냄. 길이: {len}, 프로토콜: {((MSGID)pmsg.Id).ToString()}");
             }
 
-            _isReadyToSend = true; //다시 보낼 수 있도록 세팅
+            _isReadyToSend = true; 
         }
     }
 
@@ -126,7 +126,7 @@ public class NetworkManager : MonoBehaviour
 
         try
         {
-            await _socket.ConnectAsync(serverUri, CancellationToken.None); // 나중에 변경
+            await _socket.ConnectAsync(serverUri, CancellationToken.None);
             _stateText.text = "접속 상태 - 접속됨";
             ReceiveLoop();
         }

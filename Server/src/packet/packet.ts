@@ -9,7 +9,75 @@ export namespace christMinsu {
         NAME = 0,
         SessionINFO = 1,
         ChangeSCENE = 2,
-        CHAT = 4
+        CHAT = 3,
+        MSGBOX = 4
+    }
+    export class MsgBox extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            msg?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("msg" in data && data.msg != undefined) {
+                    this.msg = data.msg;
+                }
+            }
+        }
+        get msg() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set msg(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            msg?: string;
+        }): MsgBox {
+            const message = new MsgBox({});
+            if (data.msg != null) {
+                message.msg = data.msg;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                msg?: string;
+            } = {};
+            if (this.msg != null) {
+                data.msg = this.msg;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.msg.length)
+                writer.writeString(1, this.msg);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MsgBox {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MsgBox();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.msg = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MsgBox {
+            return MsgBox.deserialize(bytes);
+        }
     }
     export class Name extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -171,37 +239,55 @@ export namespace christMinsu {
     export class ChangeScene extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            name?: string;
+            sceneName?: string;
+            sessionName?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("name" in data && data.name != undefined) {
-                    this.name = data.name;
+                if ("sceneName" in data && data.sceneName != undefined) {
+                    this.sceneName = data.sceneName;
+                }
+                if ("sessionName" in data && data.sessionName != undefined) {
+                    this.sessionName = data.sessionName;
                 }
             }
         }
-        get name() {
+        get sceneName() {
             return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
         }
-        set name(value: string) {
+        set sceneName(value: string) {
             pb_1.Message.setField(this, 1, value);
         }
+        get sessionName() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set sessionName(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
         static fromObject(data: {
-            name?: string;
+            sceneName?: string;
+            sessionName?: string;
         }): ChangeScene {
             const message = new ChangeScene({});
-            if (data.name != null) {
-                message.name = data.name;
+            if (data.sceneName != null) {
+                message.sceneName = data.sceneName;
+            }
+            if (data.sessionName != null) {
+                message.sessionName = data.sessionName;
             }
             return message;
         }
         toObject() {
             const data: {
-                name?: string;
+                sceneName?: string;
+                sessionName?: string;
             } = {};
-            if (this.name != null) {
-                data.name = this.name;
+            if (this.sceneName != null) {
+                data.sceneName = this.sceneName;
+            }
+            if (this.sessionName != null) {
+                data.sessionName = this.sessionName;
             }
             return data;
         }
@@ -209,8 +295,10 @@ export namespace christMinsu {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.name.length)
-                writer.writeString(1, this.name);
+            if (this.sceneName.length)
+                writer.writeString(1, this.sceneName);
+            if (this.sessionName.length)
+                writer.writeString(2, this.sessionName);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -221,7 +309,10 @@ export namespace christMinsu {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.name = reader.readString();
+                        message.sceneName = reader.readString();
+                        break;
+                    case 2:
+                        message.sessionName = reader.readString();
                         break;
                     default: reader.skipField();
                 }

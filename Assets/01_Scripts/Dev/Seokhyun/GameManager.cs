@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ChristMinsu.Packet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ChristMinsu.DevSeok
 {
@@ -32,6 +35,20 @@ namespace ChristMinsu.DevSeok
             NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
             NetworkManager.Instance.Init(_connectionUrl, SocketInfoCanvas);
             NetworkManager.Instance.Connection();
+        }
+
+        public void CreateRemoteManager(SessionInfo[] allSessionInfo)
+        {
+            RemotePlayerManager.Instance = gameObject.AddComponent<RemotePlayerManager>();
+            RemotePlayerManager.Instance.Init(allSessionInfo);
+        }
+
+        public void KillComponent<T>() where T : MonoBehaviour
+        {
+            if(TryGetComponent<T>(out T component))
+            {
+                Destroy(component);
+            }
         }
 
         private void OnDestroy()

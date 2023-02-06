@@ -15,7 +15,7 @@ namespace ChristMinsu.DevSeok
         {
             GetComponent<Button>().onClick.AddListener(() => {
                 Name name = new Name { Value = _field.text };
-                NetworkManager.Instance.RegisterSend((ushort)MSGID.Name, name);
+                NetworkManager.Instance.RegisterSend(MSGID.Name, name);
             });
         }
     }

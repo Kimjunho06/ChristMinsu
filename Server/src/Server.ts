@@ -6,6 +6,7 @@ import crypto from "crypto";
 import Session from "./Session";
 import SessionManager from "./SessionManager";
 import PacketManager from "./PacketManager";
+import { SessionState } from "./SessionState";
 
 const App: Application = Express();
 
@@ -32,6 +33,10 @@ wss.on("connection", (soc: WebSocket, req: http.IncomingMessage) => {
     const uuid = crypto.randomUUID();
     let session = new Session(soc, uuid, () => {
         SessionManager.Instance.removeSession(uuid);
+        // if(session.state == SessionState.LOGIN)
+        // {
+        //     SessionManager.Instance.broadcast()
+        // }
     });
     SessionManager.Instance.addSession(session, uuid);
     console.log(

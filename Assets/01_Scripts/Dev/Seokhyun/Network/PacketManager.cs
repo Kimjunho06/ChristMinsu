@@ -32,6 +32,12 @@ public class PacketManager
 
         _OnRecv.Add((ushort)MSGID.Name, MakePacket<Name>);
         _Handlers.Add((ushort)MSGID.Name, new EnterHandler());
+
+        _OnRecv.Add((ushort)MSGID.Msgbox, MakePacket<MsgBox>);
+        _Handlers.Add((ushort)MSGID.Msgbox, new MsgBoxHandler());
+
+        _OnRecv.Add((ushort)MSGID.Chat, MakePacket<Chat>);
+        _Handlers.Add((ushort)MSGID.Chat, new ChatHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)
@@ -58,10 +64,10 @@ public class PacketManager
         }
         else
         {
-            Debug.LogError($"There is no packet handler for this packet : {code}, ({size}");
+            Debug.LogError($"There is no packet handler for this packet : {((MSGID)code).ToString()}, ({size}");
             return 0;
         }
-        Debug.Log($"패킷 받음. 길이: {size}, 프로토콜: {code}");
+        Debug.Log($"패킷 받음. 길이: {size}, 프로토콜: {((MSGID)code).ToString()}");
         return size;
     }
 
