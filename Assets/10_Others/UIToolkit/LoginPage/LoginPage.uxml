@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/10_Others/UIToolkit/LoginPage/LoginPage.uss?fileID=7433441132597879392&amp;guid=565cd4682ed4a9f4c832ded2b06bad8d&amp;type=3#LoginPage" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-shrink: 0; width: 100%; height: 100%; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);">
+        <ui:VisualElement name="top_container" style="height: 60%; width: 100%; justify-content: flex-end; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; align-items: flex-start;">
+            <ui:Label text="모여모여 크리스마스" display-tooltip-when-elided="true" name="txt_title" style="-unity-font: url(&apos;project://database/Assets/10_Others/Fonts/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=d973f8f64f5777845aacba1adaaa4c41&amp;type=3#Maplestory Bold&apos;); -unity-font-definition: none; font-size: 150px; color: rgb(0, 0, 0);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="bottom_container" style="width: 100%; height: 100%; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 60px; align-items: flex-start;">
+            <ui:VisualElement name="window" style="width: 50%; height: 100%; background-color: rgb(204, 204, 204); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 40px; padding-right: 40px; padding-top: 30px; padding-bottom: 30px;">
+                <ui:VisualElement name="now_select" style="height: 40%; width: 35%; background-color: rgb(161, 161, 161); align-items: center; justify-content: space-around; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                    <ui:Label text="로그인 하기" display-tooltip-when-elided="true" style="-unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/10_Others/Fonts/Maplestory%20Light.ttf?fileID=12800000&amp;guid=bb34a74357f6370498014247473d9fb8&amp;type=3#Maplestory Light&apos;); color: rgb(0, 0, 0); font-size: 40px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="main_window" style="height: 100%; margin-top: 10px; margin-bottom: 10px; background-color: rgb(255, 255, 255); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px;">
+                    <ui:VisualElement name="get_info" style="flex-grow: 1; flex-direction: row; padding-top: 0; padding-bottom: 10px;">
+                        <ui:VisualElement name="inputs" style="flex-grow: 1; margin-right: 10px; justify-content: space-between;">
+                            <ui:VisualElement name="get_id" style="height: 45%;">
+                                <ui:TextField picking-mode="Ignore" label="이름" name="input_id" style="flex-grow: 1; -unity-text-align: middle-center; -unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/10_Others/Fonts/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=d973f8f64f5777845aacba1adaaa4c41&amp;type=3#Maplestory Bold&apos;); font-size: 24px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-font-style: normal; color: rgba(255, 255, 255, 255);" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="get_pw" style="height: 45%; -unity-text-align: middle-center;">
+                                <ui:TextField picking-mode="Ignore" label="비밀번호" name="input_pw" password="true" style="flex-grow: 1; font-size: 24px; -unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/10_Others/Fonts/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=d973f8f64f5777845aacba1adaaa4c41&amp;type=3#Maplestory Bold&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:Button text="로그인" display-tooltip-when-elided="true" name="btn_confirm" class="button" style="width: 28%; margin-top: 0; margin-bottom: 0; margin-right: 0; background-color: rgb(123, 123, 123); margin-left: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); color: rgba(255, 255, 255, 255);" />
+                    </ui:VisualElement>
+                    <ui:Label text="중복된 이름입니다." display-tooltip-when-elided="true" name="errror_msg" style="-unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/10_Others/Fonts/Maplestory%20Bold.ttf?fileID=12800000&amp;guid=d973f8f64f5777845aacba1adaaa4c41&amp;type=3#Maplestory Bold&apos;); font-size: 18px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; color: rgb(0, 0, 0);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="buttons" style="height: 40%; margin-left: 0; margin-right: 0; margin-top: 10px; margin-bottom: 10px; flex-direction: row; justify-content: space-between;">
+                    <ui:Button text="가입 하기" display-tooltip-when-elided="true" name="btn_change" class="button" style="flex-grow: 0; margin-left: 0; margin-right: 0; flex-shrink: 0;" />
+                    <ui:Button text="게임 끝내기" display-tooltip-when-elided="true" name="btn_exit" class="button" style="flex-grow: 0; margin-left: 0; margin-right: 0; flex-shrink: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
