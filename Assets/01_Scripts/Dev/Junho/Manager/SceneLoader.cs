@@ -8,9 +8,13 @@ public class SceneLoader : MonoBehaviour
 {
     private async void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Loading.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
-    public void OnLoadScene(Action<AsyncOperation> callback)
+    public void OnLoadScene(Action<AsyncOperation> callback) 
     {
         var next = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         

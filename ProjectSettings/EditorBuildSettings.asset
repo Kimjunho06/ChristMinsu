@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/00_Scenes/Dev/Junho/Junho.unity
+    guid: 3064fc6fed86145499df25905c24aac9
+  - enabled: 1
+    path: Assets/00_Scenes/Dev/Junho/TestScene.unity
+    guid: 0d3a604777ad106428c091ecd5232911
+  - enabled: 1
+    path: Assets/00_Scenes/Dev/Junho/Loading.unity
+    guid: 80a526163c3eeb649b79553df5df7438
   m_configObjects: {}
