@@ -7,9 +7,15 @@
                 <ui:Label text="Label" display-tooltip-when-elided="true" style="font-size: 80px; margin-left: 20%; margin-right: 20%; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
             </ui:VisualElement>
             <ui:VisualElement style="width: 63%; height: 100%; padding-top: 1%;">
-                <ui:VisualElement style="height: 33%; padding-top: 0;">
+                <ui:VisualElement style="height: 33%; padding-top: 0; flex-direction: column;">
                     <ui:Label text="머리" display-tooltip-when-elided="true" style="width: 100px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: upper-center; font-size: 20px;" />
-                    <ui:GroupBox style="height: 214px;" />
+                    <ui:GroupBox style="height: 214px; flex-direction: row; justify-content: space-between;">
+                        <ui:Button text="Button" display-tooltip-when-elided="true" />
+                        <ui:GroupBox style="width: 943px;">
+                            <ui:IMGUIContainer style="height: 188px;" />
+                        </ui:GroupBox>
+                        <ui:Button text="Button" display-tooltip-when-elided="true" />
+                    </ui:GroupBox>
                 </ui:VisualElement>
                 <ui:VisualElement style="height: 33%; padding-top: 0;" />
                 <ui:VisualElement style="height: 33%; padding-top: 0;" />
