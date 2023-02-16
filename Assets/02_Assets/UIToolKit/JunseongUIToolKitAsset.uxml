@@ -12,7 +12,7 @@
                     <ui:GroupBox style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-left&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0); color: rgba(27, 27, 27, 0);" />
                         <ui:GroupBox style="width: 943px; flex-direction: row; justify-content: space-between;">
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel1" class="item--Panel" />
+                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel1" class="item--Panel" style="width: 18%;" />
                             <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel2" class="item--Panel" />
                             <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel3" class="item--Panel" />
                             <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel4" class="item--Panel" />
