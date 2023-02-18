@@ -10,6 +10,7 @@ public enum ItemType
     Accessari
 }
 
+[CreateAssetMenu(menuName = "Assets/SO/Item")]
 public class ItemSO : ScriptableObject
 {
     public ItemType _itemType;
