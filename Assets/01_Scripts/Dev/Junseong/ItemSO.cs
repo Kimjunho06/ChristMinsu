@@ -7,7 +7,7 @@ public enum ItemType
 {
     Head,
     Cloth,
-    Accessari
+    Accessorie
 }
 
 [CreateAssetMenu(menuName = "Assets/SO/Item")]

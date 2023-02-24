@@ -50,6 +50,10 @@
     max-width: none;
     width: 170px;
     height: 100%;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
 }
 
 .Body--Position--Label {
@@ -67,4 +71,10 @@
     position: absolute;
     top: -12px;
     left: 116px;
+}
+
+.item--Group {
+    width: 943px;
+    flex-direction: row;
+    justify-content: space-between;
 }

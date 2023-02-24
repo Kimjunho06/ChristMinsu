@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 624a8a16293921a4489f444d84a95c96, type: 3}
-  m_Name: AccessariItemSample
+  m_Name: Accessar
   m_EditorClassIdentifier: 
-  _itemType: 0
+  _itemType: 2
   _itemName: 

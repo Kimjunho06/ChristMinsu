@@ -9,50 +9,33 @@
             <ui:VisualElement name="Main-RightPanel" style="width: 63%; height: 100%; padding-top: 1%;">
                 <ui:VisualElement name="CustomizeBoxList--Top" style="height: 33%; padding-top: 0; flex-direction: column;">
                     <ui:Label text="머리" display-tooltip-when-elided="true" name="LabelName-Head" class="Body--Position--Label" style="-unity-text-align: upper-left; top: -18px; left: 121px; -unity-font-style: bold;" />
-                    <ui:GroupBox style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
+                    <ui:GroupBox name="Top-Group" style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-left&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0); color: rgba(27, 27, 27, 0);" />
-                        <ui:ListView focusable="true" name="head--ListView" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel1" class="item--Panel" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel2" class="item--Panel" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel3" class="item--Panel" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel4" class="item--Panel" />
-                        <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel5" class="item--Panel" />
+                        <ui:GroupBox name="head--GroupBox" class="item--Group" />
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4521532143779581420&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-right&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(0, 0, 0); font-size: 14px; color: rgba(255, 255, 255, 0);" />
                     </ui:GroupBox>
                 </ui:VisualElement>
                 <ui:VisualElement name="CustomizeBoxList--Middle" style="height: 33%; padding-top: 0; flex-direction: column;">
                     <ui:Label text="옷" display-tooltip-when-elided="true" name="LabelName-Cloth" class="Body--Position--Label" style="-unity-text-align: upper-left; top: -13px; left: 116px; -unity-font-style: bold;" />
-                    <ui:GroupBox style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
+                    <ui:GroupBox name="Middle-Group" style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-left&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0); color: rgba(27, 27, 27, 0);" />
-                        <ui:GroupBox name="cloth--GroupBox" style="width: 943px; flex-direction: row; justify-content: space-between;">
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel1" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel2" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel3" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel4" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel5" class="item--Panel" />
-                        </ui:GroupBox>
+                        <ui:GroupBox name="cloth--GroupBox" class="item--Group" />
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4521532143779581420&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-right&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(0, 0, 0); font-size: 14px; color: rgba(255, 255, 255, 0);" />
                     </ui:GroupBox>
                 </ui:VisualElement>
                 <ui:VisualElement name="CustomizeBoxList--Bottom" style="height: 33%; padding-top: 0; flex-direction: column;">
                     <ui:Label text="악세사리" display-tooltip-when-elided="true" name="LabelName-Accesarri" class="Body--Position--Label" style="-unity-text-align: upper-left; top: -12px; left: 111px; -unity-font-style: bold;" />
-                    <ui:GroupBox style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
+                    <ui:GroupBox name="Under-Group" style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-left&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0); color: rgba(27, 27, 27, 0);" />
-                        <ui:GroupBox name="accessories--GroupBox" style="width: 943px; flex-direction: row; justify-content: space-between;">
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel1" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel2" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel3" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel4" class="item--Panel" />
-                            <ui:Button text="Button" display-tooltip-when-elided="true" name="itemPanel5" class="item--Panel" />
-                        </ui:GroupBox>
+                        <ui:GroupBox name="accessories--GroupBox" class="item--Group" style="width: 943px; flex-direction: row; justify-content: space-between;" />
                         <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4521532143779581420&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-right&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(0, 0, 0); font-size: 14px; color: rgba(255, 255, 255, 0);" />
                     </ui:GroupBox>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="width: 100%; height: 20%; flex-direction: row; align-items: center; justify-content: space-between; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 50px; padding-right: 50px; padding-top: 20px; padding-bottom: 20px;">
-            <ui:Button text="이전으로" display-tooltip-when-elided="true" class="Button-under" />
-            <ui:Button text="접속하기" display-tooltip-when-elided="true" class="Button-under" />
+            <ui:Button text="이전으로" display-tooltip-when-elided="true" name="back--button" class="Button-under" />
+            <ui:Button text="접속하기" display-tooltip-when-elided="true" name="join--button" class="Button-under" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
