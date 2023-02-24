@@ -7,8 +7,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class NetworkManager : MonoBehaviour
     private Button _connectBtn = null;
     private Button _disconnectBtn = null;
 
-    public void Init(string url, Transform canvas)
+    public void Init(string url, UIDocument document)
     {
         _url = url;
         _recvBuffer = new RecvBuffer(1024 * 10);
@@ -39,8 +38,10 @@ public class NetworkManager : MonoBehaviour
         _sendQueue = new Queue<PacketMessage>();
 
         // UI
+        VisualElement root = document.rootVisualElement;
+
         _stateText = canvas.Find("SocketState").GetComponent<TextMeshProUGUI>();
-        _stateText.text = "Á¢¼Ó »óÅÂ - Á¢¼ÓµÇÁö ¾ÊÀ½";
+        _stateText.text = "å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ - å ì™ì˜™å ìŒˆë“¸ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™";
 
         _uuid = canvas.Find("UUID").GetComponent<TextMeshProUGUI>();
         _uuid.text = null;
@@ -105,7 +106,7 @@ public class NetworkManager : MonoBehaviour
 
                 ArraySegment<byte> segment = new ArraySegment<byte>(sendBuffer, 0, len + 4);
                 await _socket.SendAsync(segment, WebSocketMessageType.Binary, true, CancellationToken.None);
-                Debug.Log($"ÆĞÅ¶ º¸³¿. ±æÀÌ: {len}, ÇÁ·ÎÅäÄİ: {((MSGID)pmsg.Id).ToString()}");
+                Debug.Log($"å ì™ì˜™í‚· å ì™ì˜™å ì™ì˜™. å ì™ì˜™å ì™ì˜™: {len}, å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™: {((MSGID)pmsg.Id).ToString()}");
             }
 
             _isReadyToSend = true; 
@@ -117,7 +118,7 @@ public class NetworkManager : MonoBehaviour
         if (_socket != null && _socket.State == WebSocketState.Open)
         {
             Debug.LogError("Already Connected!!");
-            _stateText.text = "Á¢¼Ó »óÅÂ - Á¢¼ÓµÊ";
+            // _stateText.text = "å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ - å ì™ì˜™å ìŒˆë“¸ì˜™";
             return;
         }
 
@@ -127,13 +128,13 @@ public class NetworkManager : MonoBehaviour
         try
         {
             await _socket.ConnectAsync(serverUri, CancellationToken.None);
-            _stateText.text = "Á¢¼Ó »óÅÂ - Á¢¼ÓµÊ";
+            // _stateText.text = "å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ - å ì™ì˜™å ìŒˆë“¸ì˜™";
             ReceiveLoop();
         }
         catch (Exception e)
         {
             Debug.LogError("Connection Error : check server status... " + e.Message);
-            _stateText.text = "Á¢¼Ó »óÅÂ - Á¢¼ÓµÇÁö ¾ÊÀ½";
+            // _stateText.text = "å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ - å ì™ì˜™å ìŒˆë“¸ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™";
             throw;
         }
     }
@@ -195,8 +196,8 @@ public class NetworkManager : MonoBehaviour
         if (_socket != null && _socket.State == WebSocketState.Open)
         {
             _socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "quit Client", CancellationToken.None);
-            _stateText.text = "Á¢¼Ó »óÅÂ - Á¢¼ÓµÇÁö ¾ÊÀ½";
-            _uuid.text = null;
+            // _stateText.text = "å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ - å ì™ì˜™å ìŒˆë“¸ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™";
+            // _uuid.text = null;
         }
     }
 }

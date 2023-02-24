@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ChristMinsu.Packet;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 namespace ChristMinsu.DevSeok
@@ -13,13 +14,13 @@ namespace ChristMinsu.DevSeok
 
         public static GameManager Instance;
 
-        private Transform _socketInfoCanvas;
-        public Transform SocketInfoCanvas
+        private UIDocument _socketInfoCanvas;
+        public UIDocument SocketInfoCanvas
         {
             get
             {
                 if(_socketInfoCanvas == null)
-                    _socketInfoCanvas = transform.Find("Canvas");
+                    _socketInfoCanvas = GameObject.Find("SocketInfo").GetComponent<UIDocument>();
                 return _socketInfoCanvas;
             }
         }
