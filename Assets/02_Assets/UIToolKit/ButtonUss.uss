@@ -73,4 +73,28 @@
     border-top-width: 4px;
     border-bottom-width: 4px;
     flex-direction: column-reverse;
+    background-color: rgba(255, 255, 255, 255);
+}
+
+.leftButton {
+    background-image: url('project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&guid=f2f233def7510c243b2c10a45da984d7&type=3#arrow-left');
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(27, 27, 27, 0);
+}
+
+.rightButton {
+    background-image: url('project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4521532143779581420&guid=f2f233def7510c243b2c10a45da984d7&type=3#arrow-right');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0);
+}
+
+.item:focus {
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    background-color: rgba(65, 65, 65, 255);
 }

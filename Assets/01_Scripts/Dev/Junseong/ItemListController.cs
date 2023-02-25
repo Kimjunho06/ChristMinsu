@@ -36,15 +36,17 @@ public class ItemListController
 
 
     #endregion
+    CustomizeUIController _CustomizeController;
 
-    public void InitializeItemList(VisualElement root ,VisualTreeAsset itemPanelElement)
+    public void InitializeItemList(VisualElement root ,VisualTreeAsset itemPanelElement, CustomizeUIController controller)
     {
         EnumerateAllItems();
         ListAssign();
         FindElement(root);
 
         itemPanelTemplate = itemPanelElement;
-        
+        _CustomizeController = controller;
+
         FillItemList(root, head_Items, head_GroupBox.Q<GroupBox>("head--GroupBox"), 0);
         FillItemList(root, cloth_Items, Middle_GroupBox.Q<GroupBox>("middle--GroupBox"), 1);
         FillItemList(root, accessories_Items, Bottom_GroupBox.Q<GroupBox>("bottom--GroupBox"), 2);
@@ -56,6 +58,18 @@ public class ItemListController
             itemGroup.ForEach((item) =>
             {
                 item.RegisterCallback<ClickEvent>(items[Groupindex][itemIndex].OnClick); //각각 상응하는 인덱스에 아이템 클래스에 ONClick 메서드 호출
+
+                //items[Groupindex][itemIndex].OnItemClick += () =>
+                //{
+                    
+                //};
+
+                //items[Groupindex][itemIndex].OnItemDoubleClick += () =>
+                //{
+                //    if (itemXMList[Groupindex][itemIndex].ClassListContains("select"))
+                //    itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
+                //};
+
                 itemIndex++;    
             });
             Groupindex++;
@@ -105,7 +119,7 @@ public class ItemListController
         list.ForEach(itemSO =>
         {
 
-            Item item = new Item(root);
+            Item item = new Item(root, itemSO, _CustomizeController);
             VisualElement itemXML = itemPanelTemplate.Instantiate().Q("Item");
             Label label = itemXML.Q<Label>("Text");
 
@@ -115,7 +129,7 @@ public class ItemListController
                 itemXML.style.backgroundImage = new StyleBackground(itemSO._itmeImage);
             }
 
-            Debug.Log(items[groupIndex]);
+            //Debug.Log(items[groupIndex]);
             items[groupIndex].Add(item);
             itemXMList[groupIndex].Add(itemXML);
             group.Add(itemXML);

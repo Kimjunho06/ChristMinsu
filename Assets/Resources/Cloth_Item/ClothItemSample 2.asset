@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 624a8a16293921a4489f444d84a95c96, type: 3}
-  m_Name: AccessariItemSample 4
+  m_Name: ClothItemSample 2
   m_EditorClassIdentifier: 
-  _itemType: 2
+  _itemType: 1
   _itemName: 
-  _itmeImage: {fileID: 21300000, guid: 3a0c527d7f890d64a9b56b086e6e766a, type: 3}
+  _itmeImage: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
