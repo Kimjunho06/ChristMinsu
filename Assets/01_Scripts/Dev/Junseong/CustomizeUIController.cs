@@ -38,6 +38,7 @@ public class CustomizeUIController : MonoBehaviour
         {
             itemController = new ItemListController();
         }
+        Debug.Log("ItemCOntroller : " + itemController);
         itemController.InitializeItemList(root, itemPanelTemplate);
     }
 

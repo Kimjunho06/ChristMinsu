@@ -15,5 +15,5 @@ public class ItemSO : ScriptableObject
 {
     public ItemType _itemType;
     public string _itemName;
-    public Image _itmeImage;
+    public Sprite _itmeImage;
 }

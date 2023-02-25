@@ -8,13 +8,17 @@ public class Item
     private VisualElement _itemroot;
 
     private VisualElement _profileImage;
-    private Sprite _sprite;
     
-
     public Item(VisualElement _root)
     {
         _itemroot = _root;
-        
-        //_sprite = sprite;
+
+        _profileImage = _root.Q<VisualElement>("Image");
+    }
+
+    public void OnClick(ClickEvent click)
+    {
+        //item click시 교체할거 구현해야함
+        Debug.Log("ItemClick됨");
     }
 }

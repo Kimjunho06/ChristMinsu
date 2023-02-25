@@ -38,24 +38,6 @@
     border-bottom-right-radius: 0;
 }
 
-.item--Panel {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    max-width: none;
-    width: 170px;
-    height: 100%;
-    border-left-width: 3px;
-    border-right-width: 3px;
-    border-top-width: 3px;
-    border-bottom-width: 3px;
-}
-
 .Body--Position--Label {
     width: 100px;
     margin-left: 0;
@@ -76,5 +58,19 @@
 .item--Group {
     width: 943px;
     flex-direction: row;
-    justify-content: space-between;
+    overflow: hidden;
+}
+
+.item {
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 17%;
+    height: 100%;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    flex-direction: column-reverse;
 }

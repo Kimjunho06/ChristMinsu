@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/02_Assets/UIToolKit/ButtonUss.uss?fileID=7433441132597879392&amp;guid=3c7a2fbb0c73c054789ae79941f4b6d8&amp;type=3#ButtonUss" />
+    <ui:Button text="Button" display-tooltip-when-elided="true" name="Item" class="item" style="height: 100%; margin-left: 15px; margin-right: 15px; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="Text" style="flex-basis: 20px; flex-direction: column; border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; font-size: 20px;" />
+    </ui:Button>
+</ui:UXML>

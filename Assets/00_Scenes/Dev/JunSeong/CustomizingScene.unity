@@ -581,7 +581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac94de93e4e78740a6c473adcc77a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPanelTemplate: {fileID: 9197481963319205126, guid: 5be32c34afe1694408756c9e326c9ed2, type: 3}
+  itemPanelTemplate: {fileID: 9197481963319205126, guid: 5de230b5d4e5c2e4ea15cdb059621f86, type: 3}
+  itemGroupTemplate: {fileID: 9197481963319205126, guid: de2a1d39582c5c744b2742ee3f0a15d2, type: 3}
 --- !u!114 &1778589527
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:GroupBox name="GroupBox" style="height: 194px; flex-direction: row; justify-content: space-between; width: 1122px;">
+        <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-left&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0); color: rgba(27, 27, 27, 0);" />
+        <ui:GroupBox name="head--GroupBox" class="item--Group" />
+        <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4521532143779581420&amp;guid=f2f233def7510c243b2c10a45da984d7&amp;type=3#arrow-right&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(0, 0, 0); font-size: 14px; color: rgba(255, 255, 255, 0);" />
+    </ui:GroupBox>
+</ui:UXML>
