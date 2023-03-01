@@ -13,7 +13,11 @@ public class Item
 
     private ItemType Type;
     private Sprite _sprite;
+
+    public bool isClicked { get; private set; } = false;
+
     CustomizeUIController _controller;
+
 
     public Item(VisualElement _root, ItemSO itemSO, CustomizeUIController controller)
     {
@@ -33,12 +37,12 @@ public class Item
                 
                 if (_controller.playerCustomize.CurrentHeadSprite == _sprite)
                 {
-                    OnItemDoubleClick?.Invoke();
+                    isClicked = false;
                     _controller.playerCustomize.CurrentHeadSprite = null;
                 }
                 else
                 {
-                    OnItemClick?.Invoke();
+                    isClicked = true;
                     _controller.playerCustomize.CurrentHeadSprite = _sprite;
                 }
                 
@@ -48,12 +52,12 @@ public class Item
                 
                 if(_controller.playerCustomize.CurrentBodySprite == _sprite)
                 {
-                    OnItemDoubleClick?.Invoke();
+                    isClicked = false;
                     _controller.playerCustomize.CurrentBodySprite = null;
                 }
                 else
                 {
-                    OnItemClick?.Invoke();
+                    isClicked = true;
                     _controller.playerCustomize.CurrentBodySprite = _sprite;
                 }
                 
@@ -63,12 +67,12 @@ public class Item
 
                 if(_controller.playerCustomize.CurrentAccessariSprite == _sprite)
                 {
-                    OnItemDoubleClick?.Invoke();
+                    isClicked = false;
                     _controller.playerCustomize.CurrentAccessariSprite = null;
                 }
                 else
                 {
-                    OnItemClick?.Invoke();
+                    isClicked = true;
                     _controller.playerCustomize.CurrentAccessariSprite = _sprite;
                 }
                 

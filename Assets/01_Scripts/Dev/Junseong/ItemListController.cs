@@ -50,7 +50,11 @@ public class ItemListController
         FillItemList(root, head_Items, head_GroupBox.Q<GroupBox>("head--GroupBox"), 0);
         FillItemList(root, cloth_Items, Middle_GroupBox.Q<GroupBox>("middle--GroupBox"), 1);
         FillItemList(root, accessories_Items, Bottom_GroupBox.Q<GroupBox>("bottom--GroupBox"), 2);
+        ItemsClickEvent();
+    }
 
+    private void ItemsClickEvent()
+    {
         int Groupindex = 0;
         itemXMList.ForEach((itemGroup) =>
         {
@@ -58,19 +62,36 @@ public class ItemListController
             itemGroup.ForEach((item) =>
             {
                 item.RegisterCallback<ClickEvent>(items[Groupindex][itemIndex].OnClick); //각각 상응하는 인덱스에 아이템 클래스에 ONClick 메서드 호출
+                item.RegisterCallback<ClickEvent>((evt) =>
+                {
+                    if (items[Groupindex][itemIndex].isClicked == true) 
+                    {
+                        if (itemXMList[Groupindex][itemIndex].ClassListContains("select") == false)
+                        {
+                            itemXMList[Groupindex][itemIndex].AddToClassList("select");
+                        }
+                    }
+                    else
+                    {
+                        if (itemXMList[Groupindex][itemIndex].ClassListContains("select") == true)
+                        {
+                            itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
+                        }
+                    }
+                });
 
                 //items[Groupindex][itemIndex].OnItemClick += () =>
                 //{
-                    
+                //    Debug.Log(itemXMList[Groupindex][itemIndex]);
                 //};
 
                 //items[Groupindex][itemIndex].OnItemDoubleClick += () =>
                 //{
                 //    if (itemXMList[Groupindex][itemIndex].ClassListContains("select"))
-                //    itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
+                //        itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
                 //};
 
-                itemIndex++;    
+                itemIndex++;
             });
             Groupindex++;
         });

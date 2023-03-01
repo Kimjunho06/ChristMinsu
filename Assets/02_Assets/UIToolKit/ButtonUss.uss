@@ -73,7 +73,7 @@
     border-top-width: 4px;
     border-bottom-width: 4px;
     flex-direction: column-reverse;
-    background-color: rgba(255, 255, 255, 255);
+    background-color: rgb(255, 255, 255);
 }
 
 .leftButton {
@@ -91,10 +91,6 @@
     color: rgba(255, 255, 255, 0);
 }
 
-.item:focus {
-    border-left-width: 3px;
-    border-right-width: 3px;
-    border-top-width: 3px;
-    border-bottom-width: 3px;
-    background-color: rgba(65, 65, 65, 255);
+.item.select {
+    background-color: rgb(103, 103, 103);
 }
