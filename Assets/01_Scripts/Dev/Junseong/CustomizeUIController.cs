@@ -108,8 +108,6 @@ public class CustomizeUIController : MonoBehaviour
                 
                 float xPos = items[items.Count-1].worldBound.position.x; // 제일 뒤에 배치된 아이템의 x
                 LastXPos = rightButton.worldBound.position.x;
-                Debug.Log("xPos : " + xPos);
-                Debug.Log("LastPos : " + LastXPos);
 
                 if(xPos > LastXPos)
                 {

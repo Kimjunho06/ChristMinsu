@@ -55,45 +55,82 @@ public class ItemListController
 
     private void ItemsClickEvent()
     {
-        int Groupindex = 0;
+        int groupIndex = 0;
         itemXMList.ForEach((itemGroup) =>
         {
             int itemIndex = 0;
             itemGroup.ForEach((item) =>
             {
-                item.RegisterCallback<ClickEvent>(items[Groupindex][itemIndex].OnClick); //각각 상응하는 인덱스에 아이템 클래스에 ONClick 메서드 호출
-                item.RegisterCallback<ClickEvent>((evt) =>
+
+                #region 궁금한거
+                //item.RegisterCallback<ClickEvent>( e =>
+                //{
+                //    int gIdx = groupIndex;
+                //    int iIdx = itemIndex;
+                //    items[gIdx][iIdx].OnClick(e);
+                //    ItemClickCheckEvent(e, gIdx, iIdx);
+                //});// 이건 되는데
+                   //item.RegisterCallback<ClickEvent>((evt) => {
+                   //    Debug.Log("Evt : " + evt);
+                   //    Debug.Log(items[groupIndex][itemIndex]);
+                   //    items[groupIndex][itemIndex].OnClick(evt);
+                   //}); // 이건 안되어요  이거 원인만 알면 밑에있는것 도 고칠 수 있을거 같습니다.
+                #endregion
+
+                #region 첫번째했던 방식
+                //item.RegisterCallback<ClickEvent>(items[groupIndex][itemIndex].OnClick);
+                //item.RegisterCallback<ClickEvent>((evt) =>
+                //{
+                //    Debug.Log("Groupindex : " + groupIndex);
+                //    Debug.Log("Itemindex : " + itemIndex);
+                //    items[groupIndex][itemIndex].OnItemClick += () =>
+                //    {
+                //        if (itemXMList[groupIndex][itemIndex].ClassListContains("select") == false)
+                //        {
+                //            itemXMList[groupIndex][itemIndex].AddToClassList("select");
+                //        }
+                //        Debug.Log(itemXMList[groupIndex][itemIndex]);
+                //    };
+
+                //    items[groupIndex][itemIndex].OnItemDoubleClick += () =>
+                //    {
+                //        if (itemXMList[groupIndex][itemIndex].ClassListContains("select"))
+                //            itemXMList[groupIndex][itemIndex].RemoveFromClassList("select");
+                //    };
+                //ItemClickCheckEvent(evt);
+
+                //});
+                #endregion
+
+                #region ClickHandler? 이것도 뭔가 잘못한듯 합니다.
+                EventCallback<ClickEvent> clickHandler = items[groupIndex][itemIndex].OnClick;
+                clickHandler += ItemClickCheckEvent;
+                item.RegisterCallback(clickHandler);
+                #endregion;
+
+                void ItemClickCheckEvent(ClickEvent click)
                 {
-                    if (items[Groupindex][itemIndex].isClicked == true) 
+                    Debug.Log("Groupindex : " + groupIndex);
+                    Debug.Log("Itemindex : " + itemIndex);
+                    items[groupIndex][itemIndex].OnItemClick += () =>
                     {
-                        if (itemXMList[Groupindex][itemIndex].ClassListContains("select") == false)
+                        if (itemXMList[groupIndex][itemIndex].ClassListContains("select") == false)
                         {
-                            itemXMList[Groupindex][itemIndex].AddToClassList("select");
+                            itemXMList[groupIndex][itemIndex].AddToClassList("select");
                         }
-                    }
-                    else
+                        Debug.Log(itemXMList[groupIndex][itemIndex]);
+                    };
+
+                    items[groupIndex][itemIndex].OnItemDoubleClick += () =>
                     {
-                        if (itemXMList[Groupindex][itemIndex].ClassListContains("select") == true)
-                        {
-                            itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
-                        }
-                    }
-                });
-
-                //items[Groupindex][itemIndex].OnItemClick += () =>
-                //{
-                //    Debug.Log(itemXMList[Groupindex][itemIndex]);
-                //};
-
-                //items[Groupindex][itemIndex].OnItemDoubleClick += () =>
-                //{
-                //    if (itemXMList[Groupindex][itemIndex].ClassListContains("select"))
-                //        itemXMList[Groupindex][itemIndex].RemoveFromClassList("select");
-                //};
-
+                        if (itemXMList[groupIndex][itemIndex].ClassListContains("select"))
+                            itemXMList[groupIndex][itemIndex].RemoveFromClassList("select");
+                    };
+                }
+                
                 itemIndex++;
             });
-            Groupindex++;
+            groupIndex++;
         });
     }
 
@@ -136,17 +173,18 @@ public class ItemListController
 
     private void FillItemList(VisualElement root, List<ItemSO> list, GroupBox group , int groupIndex)
     {
-        int itemCnt = 0;
+        //Debug.Log("Groupindex~~ : " + groupIndex);
+        int itemIndex = 0;
         list.ForEach(itemSO =>
         {
 
-            Item item = new Item(root, itemSO, _CustomizeController);
+            Item item = new Item(root, itemSO, _CustomizeController, itemIndex);
             VisualElement itemXML = itemPanelTemplate.Instantiate().Q("Item");
             Label label = itemXML.Q<Label>("Text");
 
             //바꿀꺼 여기 적어놓으면 됨
             {
-                label.text = (itemCnt + 1).ToString();
+                label.text = (itemIndex + 1).ToString();
                 itemXML.style.backgroundImage = new StyleBackground(itemSO._itmeImage);
             }
 
@@ -154,8 +192,8 @@ public class ItemListController
             items[groupIndex].Add(item);
             itemXMList[groupIndex].Add(itemXML);
             group.Add(itemXML);
-            
-            itemCnt++;
+            //Debug.Log("itemIndex : " + itemIndex);
+            itemIndex++;
             
         });
         
