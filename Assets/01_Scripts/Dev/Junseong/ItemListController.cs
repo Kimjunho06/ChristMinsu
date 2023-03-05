@@ -11,9 +11,13 @@ public class ItemListController
     VisualTreeAsset itemPanelTemplate;
 
     #region 아이템을 감싸는 박스들
+    
     GroupBox head_GroupBox;
     GroupBox Middle_GroupBox;
     GroupBox Bottom_GroupBox;
+
+    List<GroupBox> itemGroupBoxs = new List<GroupBox>();
+
     #endregion
     #region item관련 list들
 
@@ -41,16 +45,20 @@ public class ItemListController
     public void InitializeItemList(VisualElement root ,VisualTreeAsset itemPanelElement, CustomizeUIController controller)
     {
         EnumerateAllItems();
-        ListAssign();
         FindElement(root);
 
         itemPanelTemplate = itemPanelElement;
         _CustomizeController = controller;
 
+        ListAssign();
+
         FillItemList(root, head_Items, head_GroupBox.Q<GroupBox>("head--GroupBox"), 0);
         FillItemList(root, cloth_Items, Middle_GroupBox.Q<GroupBox>("middle--GroupBox"), 1);
         FillItemList(root, accessories_Items, Bottom_GroupBox.Q<GroupBox>("bottom--GroupBox"), 2);
+        
         ItemsClickEvent();
+
+        //ItemsClickEvent2();
     }
 
     private void ItemsClickEvent()
@@ -61,76 +69,66 @@ public class ItemListController
             int itemIndex = 0;
             itemGroup.ForEach((item) =>
             {
-
-                #region 궁금한거
-                //item.RegisterCallback<ClickEvent>( e =>
-                //{
-                //    int gIdx = groupIndex;
-                //    int iIdx = itemIndex;
-                //    items[gIdx][iIdx].OnClick(e);
-                //    ItemClickCheckEvent(e, gIdx, iIdx);
-                //});// 이건 되는데
-                   //item.RegisterCallback<ClickEvent>((evt) => {
-                   //    Debug.Log("Evt : " + evt);
-                   //    Debug.Log(items[groupIndex][itemIndex]);
-                   //    items[groupIndex][itemIndex].OnClick(evt);
-                   //}); // 이건 안되어요  이거 원인만 알면 밑에있는것 도 고칠 수 있을거 같습니다.
-                #endregion
-
-                #region 첫번째했던 방식
-                //item.RegisterCallback<ClickEvent>(items[groupIndex][itemIndex].OnClick);
-                //item.RegisterCallback<ClickEvent>((evt) =>
-                //{
-                //    Debug.Log("Groupindex : " + groupIndex);
-                //    Debug.Log("Itemindex : " + itemIndex);
-                //    items[groupIndex][itemIndex].OnItemClick += () =>
-                //    {
-                //        if (itemXMList[groupIndex][itemIndex].ClassListContains("select") == false)
-                //        {
-                //            itemXMList[groupIndex][itemIndex].AddToClassList("select");
-                //        }
-                //        Debug.Log(itemXMList[groupIndex][itemIndex]);
-                //    };
-
-                //    items[groupIndex][itemIndex].OnItemDoubleClick += () =>
-                //    {
-                //        if (itemXMList[groupIndex][itemIndex].ClassListContains("select"))
-                //            itemXMList[groupIndex][itemIndex].RemoveFromClassList("select");
-                //    };
-                //ItemClickCheckEvent(evt);
-
-                //});
-                #endregion
-
-                #region ClickHandler? 이것도 뭔가 잘못한듯 합니다.
+                #region ClickHandler
                 EventCallback<ClickEvent> clickHandler = items[groupIndex][itemIndex].OnClick;
-                clickHandler += ItemClickCheckEvent;
                 item.RegisterCallback(clickHandler);
                 #endregion;
 
-                void ItemClickCheckEvent(ClickEvent click)
-                {
-                    Debug.Log("Groupindex : " + groupIndex);
-                    Debug.Log("Itemindex : " + itemIndex);
-                    items[groupIndex][itemIndex].OnItemClick += () =>
-                    {
-                        if (itemXMList[groupIndex][itemIndex].ClassListContains("select") == false)
-                        {
-                            itemXMList[groupIndex][itemIndex].AddToClassList("select");
-                        }
-                        Debug.Log(itemXMList[groupIndex][itemIndex]);
-                    };
-
-                    items[groupIndex][itemIndex].OnItemDoubleClick += () =>
-                    {
-                        if (itemXMList[groupIndex][itemIndex].ClassListContains("select"))
-                            itemXMList[groupIndex][itemIndex].RemoveFromClassList("select");
-                    };
-                }
-                
                 itemIndex++;
             });
             groupIndex++;
+        });
+
+        itemGroupBoxs.ForEach((group) =>
+        {
+            VisualElement lastItem = null;
+            group.RegisterCallback<ClickEvent>(evt =>
+            {
+                var currentItem = evt.target as VisualElement;
+
+                Debug.Log($"currentItemd : {currentItem}");
+                Debug.Log($"lastItemd : {lastItem}");
+                
+                if (currentItem.ClassListContains("select") == false)
+                {
+                    currentItem.AddToClassList("select");
+                }
+                else
+                {
+                    currentItem.RemoveFromClassList("select");
+                }
+
+                if (lastItem != currentItem) // 이전 선택 아이템이 현재선택 아이템과 다를때
+                {
+                    if(lastItem != null) // 이전에 선택되었던 아이템 select효과 지우기
+                    {
+                        if(lastItem.ClassListContains("select") == true)
+                        {
+                            lastItem.RemoveFromClassList("select");
+                        }
+                    }
+                }
+
+                lastItem = currentItem;
+            
+            });
+        });
+
+    }
+
+    private void ItemsClickEvent2()
+    {
+        itemGroupBoxs.ForEach((group) =>
+        {
+            group.RegisterCallback<ClickEvent>(evt =>
+            {
+                var item = evt.target as VisualElement;
+                
+                if (item.ClassListContains("select") == false)
+                    item.AddToClassList("select");
+                else 
+                    item.RemoveFromClassList("select");
+            });
         });
     }
 
@@ -139,6 +137,7 @@ public class ItemListController
         head_GroupBox = root.Q<GroupBox>("Top-Group");
         Middle_GroupBox = root.Q<GroupBox>("Middle-Group");
         Bottom_GroupBox = root.Q<GroupBox>("Bottom-Group");
+
     }
 
     private void ListAssign()
@@ -150,6 +149,10 @@ public class ItemListController
         itemXMList.Add(head_ItemXMList);
         itemXMList.Add(middle_ItemXMList);
         itemXMList.Add(bottom_ItemXMList);
+
+        itemGroupBoxs.Add(head_GroupBox.Q<GroupBox>("head--GroupBox"));
+        itemGroupBoxs.Add(Middle_GroupBox.Q<GroupBox>("middle--GroupBox"));
+        itemGroupBoxs.Add(Bottom_GroupBox.Q<GroupBox>("bottom--GroupBox"));
     }
 
 
