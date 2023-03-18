@@ -2,19 +2,25 @@ import { RawData, WebSocket } from "ws";
 import PacketManager from "./PacketManager";
 import { christMinsu } from "./packet/packet";
 import { SessionState } from "./SessionState";
+import RSAManager from "./RSA";
 
 export default class Session
 {
     socket: WebSocket;
     uuid: string;
     name: string = "";
+    rsa: RSAManager;
 
     state: SessionState;
 
-    constructor(socket: WebSocket, uuid: string, OnClose: Function) {
+    constructor(socket: WebSocket, uuid: string, rsaManager: RSAManager, OnClose: Function) {
         this.socket = socket;
         this.uuid = uuid;
         this.state = SessionState.LOGOUT;
+        this.rsa = rsaManager;
+
+        let { modulus, exponent } = this.rsa;
+        this.sendData(new christMinsu.PublicKey({modulus, exponent}).serialize(), christMinsu.MSGID.PublicKEY);
         
         this.socket.on("close", (code: number, reason: Buffer) => {
             console.log(`Session ${uuid} Disconnected. Close code : ${code}`);

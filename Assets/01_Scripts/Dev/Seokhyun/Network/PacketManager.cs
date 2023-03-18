@@ -38,6 +38,12 @@ public class PacketManager
 
         _OnRecv.Add((ushort)MSGID.Chat, MakePacket<Chat>);
         _Handlers.Add((ushort)MSGID.Chat, new ChatHandler());
+
+        _OnRecv.Add((ushort)MSGID.PublicKey, MakePacket<PublicKey>);
+        _Handlers.Add((ushort)MSGID.PublicKey, new PublicKeyHandler());
+
+        _OnRecv.Add((ushort)MSGID.LoginRes, MakePacket<LoginRes>);
+        _Handlers.Add((ushort)MSGID.LoginRes, new LoginResHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)

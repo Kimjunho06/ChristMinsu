@@ -24,33 +24,12 @@ public class NetworkManager : MonoBehaviour
     private Queue<PacketMessage> _sendQueue = null;
     private bool _isReadyToSend = true; 
 
-    // UI
-    private TextMeshProUGUI _stateText = null;
-    private TextMeshProUGUI _uuid = null;
-    private Button _connectBtn = null;
-    private Button _disconnectBtn = null;
-
-    public void Init(string url, UIDocument document)
+    public void Init(string url)
     {
         _url = url;
         _recvBuffer = new RecvBuffer(1024 * 10);
         _packetManager = new PacketManager();
         _sendQueue = new Queue<PacketMessage>();
-
-        // UI
-        VisualElement root = document.rootVisualElement;
-
-        _stateText = canvas.Find("SocketState").GetComponent<TextMeshProUGUI>();
-        _stateText.text = "占쏙옙占쏙옙 占쏙옙占쏙옙 - 占쏙옙占쌈듸옙占쏙옙 占쏙옙占쏙옙";
-
-        _uuid = canvas.Find("UUID").GetComponent<TextMeshProUGUI>();
-        _uuid.text = null;
-
-        _connectBtn = canvas.Find("Connect").GetComponent<Button>();
-        _connectBtn.onClick.AddListener(() => Connection());
-
-        _disconnectBtn = canvas.Find("Disconnect").GetComponent<Button>();
-        _disconnectBtn.onClick.AddListener(() => Disconnect());
     }
 
     private void Update()

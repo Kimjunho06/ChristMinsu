@@ -10,11 +10,44 @@ enum MSGID
     ChangeSCENE = 2;
     CHAT = 3;
     MSGBOX = 4;
+    PublicKEY = 5;
+    RegisterREQ = 6;
+    LoginREQ = 7;
+    LoginRES = 8;
+    RegisterRES = 9;
 }
 
 message MsgBox
 {
     string msg = 1;
+}
+
+message PublicKey
+{
+    string modulus = 1;
+    string exponent = 2;
+}
+
+message RegisterReq
+{
+    string name = 1;
+    string pw = 2;
+}
+
+message RegisterRes
+{
+    bool success = 1;
+}
+
+message LoginReq
+{
+    string name = 1;
+    string pw = 2;
+}
+
+message LoginRes
+{
+    bool success = 1;
 }
 
 message Name 

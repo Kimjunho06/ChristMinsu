@@ -10,7 +10,12 @@ export namespace christMinsu {
         SessionINFO = 1,
         ChangeSCENE = 2,
         CHAT = 3,
-        MSGBOX = 4
+        MSGBOX = 4,
+        PublicKEY = 5,
+        RegisterREQ = 6,
+        LoginREQ = 7,
+        LoginRES = 8,
+        RegisterRES = 9
     }
     export class MsgBox extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -77,6 +82,410 @@ export namespace christMinsu {
         }
         static deserializeBinary(bytes: Uint8Array): MsgBox {
             return MsgBox.deserialize(bytes);
+        }
+    }
+    export class PublicKey extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            modulus?: string;
+            exponent?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("modulus" in data && data.modulus != undefined) {
+                    this.modulus = data.modulus;
+                }
+                if ("exponent" in data && data.exponent != undefined) {
+                    this.exponent = data.exponent;
+                }
+            }
+        }
+        get modulus() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set modulus(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get exponent() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set exponent(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            modulus?: string;
+            exponent?: string;
+        }): PublicKey {
+            const message = new PublicKey({});
+            if (data.modulus != null) {
+                message.modulus = data.modulus;
+            }
+            if (data.exponent != null) {
+                message.exponent = data.exponent;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                modulus?: string;
+                exponent?: string;
+            } = {};
+            if (this.modulus != null) {
+                data.modulus = this.modulus;
+            }
+            if (this.exponent != null) {
+                data.exponent = this.exponent;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.modulus.length)
+                writer.writeString(1, this.modulus);
+            if (this.exponent.length)
+                writer.writeString(2, this.exponent);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PublicKey {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PublicKey();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.modulus = reader.readString();
+                        break;
+                    case 2:
+                        message.exponent = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): PublicKey {
+            return PublicKey.deserialize(bytes);
+        }
+    }
+    export class RegisterReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+            pw?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("pw" in data && data.pw != undefined) {
+                    this.pw = data.pw;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pw() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set pw(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            name?: string;
+            pw?: string;
+        }): RegisterReq {
+            const message = new RegisterReq({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.pw != null) {
+                message.pw = data.pw;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+                pw?: string;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.pw != null) {
+                data.pw = this.pw;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.pw.length)
+                writer.writeString(2, this.pw);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RegisterReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RegisterReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    case 2:
+                        message.pw = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): RegisterReq {
+            return RegisterReq.deserialize(bytes);
+        }
+    }
+    export class RegisterRes extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            success?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("success" in data && data.success != undefined) {
+                    this.success = data.success;
+                }
+            }
+        }
+        get success() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set success(value: boolean) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            success?: boolean;
+        }): RegisterRes {
+            const message = new RegisterRes({});
+            if (data.success != null) {
+                message.success = data.success;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                success?: boolean;
+            } = {};
+            if (this.success != null) {
+                data.success = this.success;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.success != false)
+                writer.writeBool(1, this.success);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RegisterRes {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RegisterRes();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.success = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): RegisterRes {
+            return RegisterRes.deserialize(bytes);
+        }
+    }
+    export class LoginReq extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            name?: string;
+            pw?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("name" in data && data.name != undefined) {
+                    this.name = data.name;
+                }
+                if ("pw" in data && data.pw != undefined) {
+                    this.pw = data.pw;
+                }
+            }
+        }
+        get name() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set name(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get pw() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set pw(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            name?: string;
+            pw?: string;
+        }): LoginReq {
+            const message = new LoginReq({});
+            if (data.name != null) {
+                message.name = data.name;
+            }
+            if (data.pw != null) {
+                message.pw = data.pw;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                name?: string;
+                pw?: string;
+            } = {};
+            if (this.name != null) {
+                data.name = this.name;
+            }
+            if (this.pw != null) {
+                data.pw = this.pw;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.name.length)
+                writer.writeString(1, this.name);
+            if (this.pw.length)
+                writer.writeString(2, this.pw);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoginReq {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoginReq();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.name = reader.readString();
+                        break;
+                    case 2:
+                        message.pw = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): LoginReq {
+            return LoginReq.deserialize(bytes);
+        }
+    }
+    export class LoginRes extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            success?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("success" in data && data.success != undefined) {
+                    this.success = data.success;
+                }
+            }
+        }
+        get success() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set success(value: boolean) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            success?: boolean;
+        }): LoginRes {
+            const message = new LoginRes({});
+            if (data.success != null) {
+                message.success = data.success;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                success?: boolean;
+            } = {};
+            if (this.success != null) {
+                data.success = this.success;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.success != false)
+                writer.writeBool(1, this.success);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): LoginRes {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new LoginRes();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.success = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): LoginRes {
+            return LoginRes.deserialize(bytes);
         }
     }
     export class Name extends pb_1.Message {
@@ -151,6 +560,7 @@ export namespace christMinsu {
         constructor(data?: any[] | {
             uuid?: string;
             name?: string;
+            position?: Position;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -160,6 +570,9 @@ export namespace christMinsu {
                 }
                 if ("name" in data && data.name != undefined) {
                     this.name = data.name;
+                }
+                if ("position" in data && data.position != undefined) {
+                    this.position = data.position;
                 }
             }
         }
@@ -175,9 +588,19 @@ export namespace christMinsu {
         set name(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
+        get position() {
+            return pb_1.Message.getWrapperField(this, Position, 3) as Position;
+        }
+        set position(value: Position) {
+            pb_1.Message.setWrapperField(this, 3, value);
+        }
+        get has_position() {
+            return pb_1.Message.getField(this, 3) != null;
+        }
         static fromObject(data: {
             uuid?: string;
             name?: string;
+            position?: ReturnType<typeof Position.prototype.toObject>;
         }): SessionInfo {
             const message = new SessionInfo({});
             if (data.uuid != null) {
@@ -186,18 +609,25 @@ export namespace christMinsu {
             if (data.name != null) {
                 message.name = data.name;
             }
+            if (data.position != null) {
+                message.position = Position.fromObject(data.position);
+            }
             return message;
         }
         toObject() {
             const data: {
                 uuid?: string;
                 name?: string;
+                position?: ReturnType<typeof Position.prototype.toObject>;
             } = {};
             if (this.uuid != null) {
                 data.uuid = this.uuid;
             }
             if (this.name != null) {
                 data.name = this.name;
+            }
+            if (this.position != null) {
+                data.position = this.position.toObject();
             }
             return data;
         }
@@ -209,6 +639,8 @@ export namespace christMinsu {
                 writer.writeString(1, this.uuid);
             if (this.name.length)
                 writer.writeString(2, this.name);
+            if (this.has_position)
+                writer.writeMessage(3, this.position, () => this.position.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -223,6 +655,9 @@ export namespace christMinsu {
                         break;
                     case 2:
                         message.name = reader.readString();
+                        break;
+                    case 3:
+                        reader.readMessage(message.position, () => message.position = Position.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -414,6 +849,96 @@ export namespace christMinsu {
         }
         static deserializeBinary(bytes: Uint8Array): Chat {
             return Chat.deserialize(bytes);
+        }
+    }
+    export class Position extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            x?: number;
+            y?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("x" in data && data.x != undefined) {
+                    this.x = data.x;
+                }
+                if ("y" in data && data.y != undefined) {
+                    this.y = data.y;
+                }
+            }
+        }
+        get x() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set x(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get y() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set y(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            x?: number;
+            y?: number;
+        }): Position {
+            const message = new Position({});
+            if (data.x != null) {
+                message.x = data.x;
+            }
+            if (data.y != null) {
+                message.y = data.y;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                x?: number;
+                y?: number;
+            } = {};
+            if (this.x != null) {
+                data.x = this.x;
+            }
+            if (this.y != null) {
+                data.y = this.y;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.x != 0)
+                writer.writeFloat(1, this.x);
+            if (this.y != 0)
+                writer.writeFloat(2, this.y);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Position {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Position();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.x = reader.readFloat();
+                        break;
+                    case 2:
+                        message.y = reader.readFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Position {
+            return Position.deserialize(bytes);
         }
     }
 }

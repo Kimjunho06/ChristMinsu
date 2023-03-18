@@ -19,5 +19,6 @@ export const NameHandler: PacketHandler = {
 
         let scene = new christMinsu.ChangeScene({sceneName:"InGame", sessionName:session.name});
         session.sendData(scene.serialize(), christMinsu.MSGID.ChangeSCENE);
+        
     }
 }

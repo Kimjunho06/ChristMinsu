@@ -1,10 +1,13 @@
+using System.Text;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using ChristMinsu.Packet;
+using System.Security.Cryptography;
 
-public class LoginPageUI : MonoBehaviour
+public class LoginPage : MonoBehaviour
 {
     private UIDocument _uiDocument;
 
@@ -19,9 +22,11 @@ public class LoginPageUI : MonoBehaviour
     private VisualElement _checkmark;
 
     private Label _windowTitle;
+    private Label _errMsg;
 
     private bool _isLoginWindow = true;
     private bool hidePW = true;
+    private PublicKey publicKeyInfo;
 
     private void OnEnable()
     {
@@ -39,6 +44,8 @@ public class LoginPageUI : MonoBehaviour
         _checkmark = _showPW.Q("unity-checkmark");
 
         _windowTitle = root.Q<Label>("window_title");
+        _errMsg = root.Q<Label>("error_msg");
+        _errMsg.text = String.Empty;
 
         _confirmBtn.RegisterCallback<ClickEvent>(Confirm);
 
@@ -69,10 +76,26 @@ public class LoginPageUI : MonoBehaviour
         if (_isLoginWindow)
         {
             Debug.Log($"Login id: {_inputID.value}\n\tpw: {_inputPW.value}");
+
+            LoginReq req = new LoginReq { Name = _inputID.value, Pw = _inputPW.value };
+            NetworkManager.Instance.RegisterSend(MSGID.LoginReq, req);
         }
         else
         {
             Debug.Log($"Register id: {_inputID.value}\n\tpw: {_inputPW.value}");
+
+            // using(RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+            // {
+            //     RSAParameters publicKey = new RSAParameters();
+                
+            //     publicKey.Modulus = Encoding.UTF8.GetBytes(publicKeyInfo.Modulus);
+            //     publicKey.Exponent = Encoding.UTF8.GetBytes(publicKeyInfo.Exponent);
+            //     RSA.ImportParameters(publicKey);
+            //     byte[] encryptedData = RSA.Encrypt(Encoding.UTF8.GetBytes(_inputPW.value), false);
+            // }
+            RegisterReq req = new RegisterReq { Name = _inputID.value, Pw = _inputPW.value };
+            NetworkManager.Instance.RegisterSend(MSGID.RegisterReq, req);
+
         }
     }
 
@@ -92,4 +115,33 @@ public class LoginPageUI : MonoBehaviour
 
         _isLoginWindow = !_isLoginWindow;
     }
+
+    public void SetPublicKey(PublicKey publicKey)
+    {
+        this.publicKeyInfo = publicKey;
+    }
+
+    public void ShowRes(LoginRes response, ResType type)
+    {
+        if(response.Success) {
+            switch(type)
+            {
+                case ResType.Login:
+                    _errMsg.text = "로그인 성공";
+                    break;
+                case ResType.Register:
+                    _errMsg.text = "가입에 성공했습니다.";
+                    break;
+            }
+        }
+        else {
+            _errMsg.text = "아이디 또는 비밀번호가 일치하지 않습니다.";
+        }
+    }
+}
+
+public enum ResType
+{
+    Login,
+    Register
 }

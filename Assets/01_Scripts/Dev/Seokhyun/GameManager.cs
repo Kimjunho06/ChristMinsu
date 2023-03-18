@@ -14,17 +14,6 @@ namespace ChristMinsu.DevSeok
 
         public static GameManager Instance;
 
-        private UIDocument _socketInfoCanvas;
-        public UIDocument SocketInfoCanvas
-        {
-            get
-            {
-                if(_socketInfoCanvas == null)
-                    _socketInfoCanvas = GameObject.Find("SocketInfo").GetComponent<UIDocument>();
-                return _socketInfoCanvas;
-            }
-        }
-
         private void Awake()
         {
             if (Instance != null)
@@ -34,7 +23,7 @@ namespace ChristMinsu.DevSeok
             DontDestroyOnLoad(gameObject);
 
             NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
-            NetworkManager.Instance.Init(_connectionUrl, SocketInfoCanvas);
+            NetworkManager.Instance.Init(_connectionUrl);
             NetworkManager.Instance.Connection();
         }
 

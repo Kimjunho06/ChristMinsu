@@ -7,12 +7,13 @@ import Session from "./Session";
 import SessionManager from "./SessionManager";
 import PacketManager from "./PacketManager";
 import { SessionState } from "./SessionState";
+import RSAManager from "./RSA";
 
 const App: Application = Express();
 
 App.get("/", (req, res) => {
     res.json(SessionManager.Instance.sessionMap);
-})
+});
 
 const httpServer = App.listen(50000, () => {
     console.log("Http Server is running on port 50000");
@@ -31,12 +32,8 @@ wss.on("listening", () => {
 
 wss.on("connection", (soc: WebSocket, req: http.IncomingMessage) => {
     const uuid = crypto.randomUUID();
-    let session = new Session(soc, uuid, () => {
+    let session = new Session(soc, uuid, new RSAManager(), () => {
         SessionManager.Instance.removeSession(uuid);
-        // if(session.state == SessionState.LOGIN)
-        // {
-        //     SessionManager.Instance.broadcast()
-        // }
     });
     SessionManager.Instance.addSession(session, uuid);
     console.log(
